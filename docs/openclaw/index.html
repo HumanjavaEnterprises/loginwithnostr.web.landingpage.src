@@ -330,6 +330,11 @@
             overflow: hidden;
         }
 
+        .skill-card .card-install .copy-btn {
+            top: 8px;
+            right: 8px;
+        }
+
         .skill-card .card-install span {
             position: absolute;
             bottom: 10px;
@@ -396,7 +401,7 @@
                 <h3>Nostr<span>Key</span><br><em>&mdash; Identity</em></h3>
                 <p class="card-desc">Cryptographic identity for AI agents. Generate keypairs, sign events, encrypt messages, persist identity.</p>
                 <div class="card-install">
-                    <button class="copy-btn" onclick="copyCode('card-install-nk')" style="top:6px;right:6px;">Copy</button>
+                    <button class="copy-btn" onclick="copyCode('card-install-nk')" >Copy</button>
                     <span id="card-install-nk">pip install nostrkey</span>
                 </div>
                 <div class="card-links">
@@ -410,7 +415,7 @@
                 <h3>Nostr<span>WalletConnect</span><br><em>&mdash; Wallet</em></h3>
                 <p class="card-desc">Lightning wallet access for AI agents. Pay invoices, check balance, create invoices via NIP-47.</p>
                 <div class="card-install">
-                    <button class="copy-btn" onclick="copyCode('card-install-nw')" style="top:6px;right:6px;">Copy</button>
+                    <button class="copy-btn" onclick="copyCode('card-install-nw')" >Copy</button>
                     <span id="card-install-nw">pip install nostrwalletconnect</span>
                 </div>
                 <div class="card-links">
@@ -424,7 +429,7 @@
                 <h3>Nostr<span>Calendar</span><br><em>&mdash; Presence</em></h3>
                 <p class="card-desc">Sovereign scheduling for AI agents. Publish availability, book meetings, negotiate times over Nostr relays.</p>
                 <div class="card-install">
-                    <button class="copy-btn" onclick="copyCode('card-install-nc')" style="top:6px;right:6px;">Copy</button>
+                    <button class="copy-btn" onclick="copyCode('card-install-nc')" >Copy</button>
                     <span id="card-install-nc">pip install nostrcalendar</span>
                 </div>
                 <div class="card-links">
