@@ -328,9 +328,9 @@
         }
 
         .skill-card .card-links {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 8px;
-            flex-wrap: wrap;
         }
 
         .skill-card .card-links a {
@@ -339,6 +339,7 @@
             border-radius: 8px;
             font-weight: 600;
             text-decoration: none;
+            text-align: center;
             transition: transform 0.15s;
         }
 
@@ -391,7 +392,7 @@
                 </div>
                 <div class="card-links">
                     <a href="https://pypi.org/project/nostrkey/" class="card-link-primary">PyPI</a>
-                    <a href="https://clawhub.ai/skills/nostrkey" class="card-link-secondary">ClawHub</a>
+                    <a href="https://clawhub.ai/skills/nostrkey" class="card-link-primary">ClawHub</a>
                     <a href="https://github.com/HumanjavaEnterprises/nostrkey.app.OC-python.src" class="card-link-secondary">Source</a>
                     <a href="#nostrkey-docs" class="card-link-secondary">Docs &darr;</a>
                 </div>
@@ -405,7 +406,7 @@
                 </div>
                 <div class="card-links">
                     <a href="https://pypi.org/project/nostrwalletconnect/" class="card-link-primary">PyPI</a>
-                    <a href="https://clawhub.ai/skills/nostrwalletconnect" class="card-link-secondary">ClawHub</a>
+                    <a href="https://clawhub.ai/skills/nostrwalletconnect" class="card-link-primary">ClawHub</a>
                     <a href="https://github.com/HumanjavaEnterprises/nwc.app.OC-python.src" class="card-link-secondary">Source</a>
                     <a href="#nostrwalletconnect-docs" class="card-link-secondary">Docs &darr;</a>
                 </div>
@@ -418,6 +419,7 @@
                     <span id="card-install-nc">pip install nostrcalendar</span>
                 </div>
                 <div class="card-links">
+                    <a href="https://pypi.org/project/nostrcalendar/" class="card-link-primary">PyPI</a>
                     <a href="https://clawhub.ai/skills/nostrcalendar" class="card-link-primary">ClawHub</a>
                     <a href="https://github.com/HumanjavaEnterprises/nostrcal.app.OC-python.src" class="card-link-secondary">Source</a>
                     <a href="#nostrcalendar-docs" class="card-link-secondary">Docs &darr;</a>
