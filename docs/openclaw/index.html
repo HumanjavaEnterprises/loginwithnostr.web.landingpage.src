@@ -306,7 +306,8 @@
             color: var(--text);
         }
 
-        .skill-card h3 span { color: var(--accent); font-weight: 400; font-size: 0.85rem; }
+        .skill-card h3 span { color: var(--accent); }
+        .skill-card h3 em { display: block; color: var(--text-muted); font-weight: 400; font-size: 0.85rem; font-style: normal; margin-top: 2px; }
 
         .skill-card .card-desc {
             color: var(--text-muted);
@@ -384,7 +385,7 @@
         <!-- Skill Cards — above the fold -->
         <div class="skill-cards">
             <div class="skill-card">
-                <h3>NostrKey <span>&mdash; Identity</span></h3>
+                <h3>Nostr<span>Key</span><br><em>Identity</em></h3>
                 <p class="card-desc">Cryptographic identity for AI agents. Generate keypairs, sign events, encrypt messages, persist identity.</p>
                 <div class="card-install">
                     <button class="copy-btn" onclick="copyCode('card-install-nk')" style="top:6px;right:6px;">Copy</button>
@@ -398,7 +399,7 @@
                 </div>
             </div>
             <div class="skill-card">
-                <h3>NostrWalletConnect <span>&mdash; Wallet</span></h3>
+                <h3>Nostr<span>WalletConnect</span><br><em>Wallet</em></h3>
                 <p class="card-desc">Lightning wallet access for AI agents. Pay invoices, check balance, create invoices via NIP-47.</p>
                 <div class="card-install">
                     <button class="copy-btn" onclick="copyCode('card-install-nw')" style="top:6px;right:6px;">Copy</button>
@@ -412,7 +413,7 @@
                 </div>
             </div>
             <div class="skill-card">
-                <h3>NostrCalendar <span>&mdash; Presence</span></h3>
+                <h3>Nostr<span>Calendar</span><br><em>Presence</em></h3>
                 <p class="card-desc">Sovereign scheduling for AI agents. Publish availability, book meetings, negotiate times over Nostr relays.</p>
                 <div class="card-install">
                     <button class="copy-btn" onclick="copyCode('card-install-nc')" style="top:6px;right:6px;">Copy</button>
