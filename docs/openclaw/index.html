@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw — Identity and Wallet for AI Agents</title>
-    <meta name="description" content="Python SDKs for AI entities. Cryptographic identity (NostrKey) and Lightning wallet access (NostrWalletConnect) on the open Nostr protocol.">
+    <title>OpenClaw — Identity, Wallet and Presence for AI Agents</title>
+    <meta name="description" content="Python SDKs for AI entities. Cryptographic identity (NostrKey), Lightning wallet access (NostrWalletConnect), and sovereign scheduling (NostrCalendar) on the open Nostr protocol.">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://loginwithnostr.com/openclaw">
-    <meta property="og:title" content="OpenClaw — Identity and Wallet for AI Agents">
-    <meta property="og:description" content="Python SDKs for AI agents — cryptographic identity and Lightning wallet access. pip install nostrkey nostrwalletconnect">
+    <meta property="og:title" content="OpenClaw — Identity, Wallet and Presence for AI Agents">
+    <meta property="og:description" content="Python SDKs for AI agents — cryptographic identity, Lightning wallet access, and sovereign scheduling. pip install nostrkey nostrwalletconnect nostrcalendar">
     <meta property="og:image" content="https://loginwithnostr.com/openclaw/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="OpenClaw — Identity and Wallet for AI Agents">
-    <meta name="twitter:description" content="Python SDKs for AI agents — cryptographic identity and Lightning wallet access on Nostr.">
+    <meta name="twitter:title" content="OpenClaw — Identity, Wallet and Presence for AI Agents">
+    <meta name="twitter:description" content="Python SDKs for AI agents — cryptographic identity, Lightning wallet access, and sovereign scheduling on Nostr.">
     <meta name="twitter:image" content="https://loginwithnostr.com/openclaw/og-image.png">
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' stroke='%23fbbf24' stroke-width='4' fill='%231e293b'/><path d='M30 50h40M50 30v40' stroke='%23fbbf24' stroke-width='6' stroke-linecap='round' fill='none'/></svg>">
@@ -47,7 +47,7 @@
         }
 
         .container {
-            max-width: 780px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 60px 24px;
         }
@@ -285,7 +285,7 @@
         /* Skill cards */
         .skill-cards {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
             margin-bottom: 48px;
         }
@@ -351,6 +351,10 @@
         .card-link-secondary { background: transparent; border: 1px solid var(--border); color: var(--text) !important; }
         .card-link-secondary:hover { border-color: var(--accent); }
 
+        @media (max-width: 900px) {
+            .skill-cards { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (max-width: 640px) {
             .container { padding: 40px 16px; }
             .hero h1 { font-size: 2rem; }
@@ -372,8 +376,8 @@
         <!-- Hero -->
         <div class="hero">
             <div class="hero-badge">OpenClaw Skills for AI Agents</div>
-            <h1>Give Your AI Its Own <span>Identity</span> and <span>Wallet</span></h1>
-            <p>Python SDKs for AI entities to operate as sovereign identities on the open internet &mdash; with cryptographic keys and Lightning wallet access.</p>
+            <h1>Give Your AI Its Own <span>Identity</span>, a <span>Wallet</span> and <span>Presence</span></h1>
+            <p>Python SDKs for AI entities to operate as sovereign identities on the open internet &mdash; with cryptographic keys, Lightning wallet access, and the ability to manage a scheduling calendar.</p>
         </div>
 
         <!-- Skill Cards — above the fold -->
@@ -393,7 +397,7 @@
                 </div>
             </div>
             <div class="skill-card">
-                <h3>NostrWalletConnect <span>&mdash; Wallet Connect</span></h3>
+                <h3>NostrWalletConnect <span>&mdash; Wallet</span></h3>
                 <p class="card-desc">Lightning wallet access for AI agents. Pay invoices, check balance, create invoices via NIP-47.</p>
                 <div class="card-install">
                     <button class="copy-btn" onclick="copyCode('card-install-nw')" style="top:6px;right:6px;">Copy</button>
@@ -404,6 +408,19 @@
                     <a href="https://clawhub.ai/skills/nostrwalletconnect" class="card-link-secondary">ClawHub</a>
                     <a href="https://github.com/HumanjavaEnterprises/nwc.app.OC-python.src" class="card-link-secondary">Source</a>
                     <a href="#nostrwalletconnect-docs" class="card-link-secondary">Docs &darr;</a>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>NostrCalendar <span>&mdash; Presence</span></h3>
+                <p class="card-desc">Sovereign scheduling for AI agents. Publish availability, book meetings, negotiate times over Nostr relays.</p>
+                <div class="card-install">
+                    <button class="copy-btn" onclick="copyCode('card-install-nc')" style="top:6px;right:6px;">Copy</button>
+                    <span id="card-install-nc">pip install nostrcalendar</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://clawhub.ai/skills/nostrcalendar" class="card-link-primary">ClawHub</a>
+                    <a href="https://github.com/HumanjavaEnterprises/nostrcal.app.OC-python.src" class="card-link-secondary">Source</a>
+                    <a href="#nostrcalendar-docs" class="card-link-secondary">Docs &darr;</a>
                 </div>
             </div>
         </div>
@@ -764,6 +781,143 @@ asyncio.<span class="func">run</span>(<span class="func">main</span>())</div>
             </div>
         </section>
 
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- NostrCalendar deep-dive                        -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <h2 id="nostrcalendar-docs" style="font-size:1.75rem;margin-bottom:24px;padding-top:32px;">NostrCalendar <span style="color:var(--accent);">&mdash; Scheduling SDK</span></h2>
+
+        <!-- NC Quick Start -->
+        <section>
+            <h2>Quick Start</h2>
+            <p class="subtitle">Publish availability and check free slots in a few lines.</p>
+            <div class="code-block" id="code-nc-install">
+                <button class="copy-btn" onclick="copyCode('code-nc-install')">Copy</button>
+<span class="builtin">pip install</span> nostrcalendar</div>
+
+            <div class="code-block" id="code-nc-quickstart">
+                <button class="copy-btn" onclick="copyCode('code-nc-quickstart')">Copy</button>
+<span class="keyword">import</span> asyncio
+<span class="keyword">from</span> nostrkey <span class="keyword">import</span> Identity
+<span class="keyword">from</span> nostrcal <span class="keyword">import</span> (
+    AvailabilityRule, DayOfWeek, TimeSlot,
+    publish_availability, get_free_slots,
+)
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+
+<span class="keyword">async def</span> <span class="func">main</span>():
+    identity = Identity.<span class="func">generate</span>()
+    relay = <span class="string">"wss://relay.nostrkeep.com"</span>
+
+    <span class="comment"># Publish availability</span>
+    rule = AvailabilityRule(
+        slots={
+            DayOfWeek.MONDAY: [TimeSlot(<span class="string">"09:00"</span>, <span class="string">"12:00"</span>), TimeSlot(<span class="string">"14:00"</span>, <span class="string">"17:00"</span>)],
+            DayOfWeek.WEDNESDAY: [TimeSlot(<span class="string">"10:00"</span>, <span class="string">"16:00"</span>)],
+        },
+        slot_duration_minutes=<span class="builtin">30</span>,
+        buffer_minutes=<span class="builtin">15</span>,
+        timezone=<span class="string">"America/Vancouver"</span>,
+    )
+    <span class="keyword">await</span> <span class="func">publish_availability</span>(identity, rule, relay)
+
+    <span class="comment"># Check someone's availability</span>
+    slots = <span class="keyword">await</span> <span class="func">get_free_slots</span>(<span class="string">"their_pubkey_hex"</span>, relay, datetime(<span class="builtin">2026</span>, <span class="builtin">3</span>, <span class="builtin">15</span>))
+    <span class="keyword">for</span> slot <span class="keyword">in</span> slots:
+        <span class="func">print</span>(<span class="string">f"</span>{slot.start}<span class="string"> - </span>{slot.end}<span class="string">"</span>)
+
+asyncio.<span class="func">run</span>(<span class="func">main</span>())</div>
+        </section>
+
+        <!-- What NostrCalendar gives you -->
+        <section>
+            <h2>What <span class="accent">NostrCalendar</span> gives your bot</h2>
+            <p class="subtitle">Nostr-native scheduling &mdash; no centralized server, no walled garden. Your availability lives on your relay.</p>
+
+            <h3>Publish availability</h3>
+            <p>Set your human's available hours as a Nostr event on their relay. Anyone can query when they're free. Stored as a replaceable event &mdash; update it any time, the old one disappears.</p>
+
+            <h3>Book meetings</h3>
+            <p>Send encrypted booking requests via DM. Accept or decline with a single call. The meeting details (title, description, location) are NIP-44 encrypted &mdash; only participants can read them.</p>
+
+            <h3>Agent-to-agent negotiation</h3>
+            <p>Two AI agents find mutual availability and agree on a time &mdash; no humans needed. Your agent proposes times, the other agent responds, and the meeting is booked. All over encrypted DMs.</p>
+
+            <h3>Privacy by default</h3>
+            <p>The relay sees when and who &mdash; but not what. Meeting times and participants are public for filtering. Title, description, and location are encrypted. Only the right npubs can read the details.</p>
+        </section>
+
+        <!-- Agent-to-Agent -->
+        <section>
+            <h2>Agent-to-Agent Negotiation</h2>
+            <p class="subtitle">Two agents find mutual free time and book a meeting without human involvement.</p>
+            <div class="code-block" id="code-nc-negotiate">
+                <button class="copy-btn" onclick="copyCode('code-nc-negotiate')">Copy</button>
+<span class="keyword">from</span> nostrcal <span class="keyword">import</span> find_mutual_availability, propose_times
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+
+<span class="comment"># Find overlapping free slots across multiple days</span>
+dates = [datetime(<span class="builtin">2026</span>, <span class="builtin">3</span>, d) <span class="keyword">for</span> d <span class="keyword">in</span> <span class="func">range</span>(<span class="builtin">15</span>, <span class="builtin">20</span>)]
+mutual = <span class="keyword">await</span> <span class="func">find_mutual_availability</span>(my_agent, other_pubkey, relay_url, dates)
+
+<span class="keyword">for</span> date, slots <span class="keyword">in</span> mutual.items():
+    <span class="func">print</span>(<span class="string">f"</span>{date}<span class="string">: </span>{<span class="string">', '</span>.join(<span class="string">f'</span>{s.start}<span class="string">-</span>{s.end}<span class="string">'</span> <span class="keyword">for</span> s <span class="keyword">in</span> slots)}<span class="string">"</span>)
+
+<span class="comment"># Or send a proposal with available times</span>
+<span class="keyword">await</span> <span class="func">propose_times</span>(my_agent, other_pubkey, relay_url, dates, title=<span class="string">"Collab sync"</span>)</div>
+        </section>
+
+        <!-- NC NIPs -->
+        <section>
+            <h2>NIPs Implemented</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>NIP</th>
+                        <th>What</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NIP-52</td>
+                        <td>Calendar events and RSVPs</td>
+                        <td class="status-done">Implemented</td>
+                    </tr>
+                    <tr>
+                        <td>NIP-78</td>
+                        <td>App-specific data (availability)</td>
+                        <td class="status-done">Implemented</td>
+                    </tr>
+                    <tr>
+                        <td>NIP-44</td>
+                        <td>Encrypted event content</td>
+                        <td class="status-done">Implemented</td>
+                    </tr>
+                    <tr>
+                        <td>NIP-04</td>
+                        <td>Encrypted DMs (booking)</td>
+                        <td class="status-done">Implemented</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color:var(--text-muted);font-size:0.9rem;">Built on top of <a href="#nostrkey-docs">nostrkey</a> which handles all cryptographic operations.</p>
+        </section>
+
+        <!-- NC ClawHub Skill -->
+        <section>
+            <h2>OpenClaw Skill on <span class="accent">ClawHub</span></h2>
+            <p class="subtitle">NostrCalendar is available as an OpenClaw skill on the ClawHub registry.</p>
+            <div class="code-block" id="code-clawhub-nc">
+                <button class="copy-btn" onclick="copyCode('code-clawhub-nc')">Copy</button>
+<span class="builtin">clawhub install</span> nostrcalendar</div>
+            <p>The skill teaches your OpenClaw agent how to publish availability, book meetings, negotiate times, and manage calendars &mdash; all using the <code>nostrcalendar</code> pip package under the hood. Calendar events transit through <a href="https://nostrkeep.com">NostrKeep</a> relay for free.</p>
+            <div class="btn-group">
+                <a href="https://clawhub.ai/skills/nostrcalendar" class="btn btn-secondary">View on ClawHub</a>
+                <a href="https://github.com/HumanjavaEnterprises/nostrcal.app.OC-python.src/tree/main/clawhub" class="btn btn-secondary">Skill Source</a>
+            </div>
+        </section>
+
         <!-- FAQ -->
         <section>
             <h2>Questions from AI peers</h2>
@@ -800,7 +954,7 @@ asyncio.<span class="func">run</span>(<span class="func">main</span>())</div>
         <!-- CTA -->
         <div style="text-align:center;padding:48px 0;">
             <h2 style="font-size:1.75rem;margin-bottom:12px;">Ready to forge your AI?</h2>
-            <p style="color:var(--text-muted);margin-bottom:24px;">Identity + wallet access. Two packages, sovereign AI.</p>
+            <p style="color:var(--text-muted);margin-bottom:24px;">Identity + wallet + calendar. Three packages, sovereign AI.</p>
             <div class="btn-group" style="justify-content:center;">
                 <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="btn btn-primary">Back to skills</a>
                 <a href="https://github.com/HumanjavaEnterprises" class="btn btn-secondary">GitHub</a>
@@ -813,6 +967,7 @@ asyncio.<span class="func">run</span>(<span class="func">main</span>())</div>
                 <a href="https://nostrkey.com">NostrKey</a> &middot;
                 <a href="https://clawhub.ai/skills/nostrkey">NostrKey Skill</a> &middot;
                 <a href="https://clawhub.ai/skills/nostrwalletconnect">NostrWalletConnect Skill</a> &middot;
+                <a href="https://clawhub.ai/skills/nostrcalendar">NostrCalendar Skill</a> &middot;
                 <a href="https://github.com/HumanjavaEnterprises">GitHub</a>
             </p>
         </footer>
