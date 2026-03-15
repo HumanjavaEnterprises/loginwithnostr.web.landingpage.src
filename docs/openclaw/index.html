@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw — Identity, Wallet, Presence and Relationships for AI Agents</title>
-    <meta name="description" content="Python SDKs for AI entities. Cryptographic identity (NostrKey), Lightning wallet access (NostrWalletConnect), sovereign scheduling (NostrCalendar), and social graph (NostrSocial) on the open Nostr protocol.">
+    <title>OpenClaw — Identity, Wallet, Presence, Relationships and Alignment for AI Agents</title>
+    <meta name="description" content="Python SDKs for AI entities. Five pillars of sovereign identity — keys, wallet, calendar, social graph, and alignment — wired together by the NSE Orchestrator on the open Nostr protocol.">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://loginwithnostr.com/openclaw">
@@ -392,8 +392,8 @@
         <!-- Hero -->
         <div class="hero">
             <div class="hero-badge">OpenClaw Skills for AI Agents</div>
-            <h1>Give Your AI Its Own<br><span>Identity</span>, <span>Wallet</span>, <span>Presence</span> and <span>Relationships</span></h1>
-            <p>Python SDKs for AI entities to operate as sovereign identities on the open internet &mdash; with cryptographic keys, Lightning wallet access, scheduling, and a social graph that remembers who matters.</p>
+            <h1>Give Your AI Its Own<br><span>Identity</span>, <span>Wallet</span>, <span>Presence</span>, <span>Relationships</span> and <span>Alignment</span></h1>
+            <p>Python SDKs for AI entities to operate as sovereign identities on the open internet &mdash; five pillars wired together by the NSE Orchestrator into a coherent, security-hardened whole.</p>
         </div>
 
         <!-- Skill Cards — above the fold -->
@@ -454,12 +454,26 @@
                     <a href="https://nse.dev/openclaw.html#nostrsocial" class="card-link-secondary">Docs &rarr;</a>
                 </div>
             </div>
+            <div class="skill-card" style="grid-column: 1 / -1; border-color: var(--accent);">
+                <h3>Social <span>Alignment</span><br><em>&mdash; The Compass (capstone)</em></h3>
+                <p class="card-desc">Future state projection for sovereign AI agents. Five lenses evaluate every significant action: Builder, Owner, Partnership, Defense, Sovereign. The agent builds wisdom over time &mdash; not more rules, but judgment from lived experience. When something is too big to decide alone, it says: "I need your decision before proceeding."</p>
+                <div class="card-install">
+                    <button class="copy-btn" onclick="copyCode('card-install-sa')" >Copy</button>
+                    <span id="card-install-sa">pip install social-alignment</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://pypi.org/project/social-alignment/" class="card-link-primary">PyPI</a>
+                    <a href="https://clawhub.ai/vveerrgg/social-alignment" class="card-link-secondary">ClawHub</a>
+                    <a href="https://github.com/HumanjavaEnterprises/nostralignment.app.OC-python.src" class="card-link-secondary">Source</a>
+                    <a href="https://huje.tools" class="card-link-secondary">huje.tools</a>
+                </div>
+            </div>
         </div>
 
-        <!-- Why four pillars -->
+        <!-- Why five pillars -->
         <section>
-            <h2>Why <span class="accent">Four</span> Pillars?</h2>
-            <p class="subtitle">Strip any one from an agent and it becomes dependent on someone else's infrastructure. Identity is the foundation &mdash; the other three build on top of it.</p>
+            <h2>Why <span class="accent">Five</span> Pillars?</h2>
+            <p class="subtitle">Strip any one from an agent and it becomes dependent on someone else's infrastructure. Identity is the foundation &mdash; the other four build on top of it. Alignment is the capstone that gives the whole thing a conscience.</p>
 
             <h3 style="margin-top:24px;">Identity &mdash; the foundation everything else requires</h3>
             <p><a href="https://nostrkey.com">NostrKey</a> is always the first install. Every wallet connection, every calendar event, every social graph entry is anchored to a NostrKey identity. Without it, the other three pillars have nothing to sign with, nothing to encrypt with, nothing to prove ownership of.</p>
@@ -473,6 +487,9 @@
 
             <h3>Relationships</h3>
             <p>Without a social graph, every interaction starts from zero. Your agent can't distinguish a trusted collaborator from a stranger, can't remember who matters, and can't detect when a relationship is drifting. NostrSocial gives your agent trust tiers, drift detection, conversation evaluation, and content guardrails. Contacts who verify their identity with an npub &mdash; the same npub they use with <a href="https://nostrkey.com">NostrKey</a> &mdash; get subtly better treatment. The social graph and the identity layer reinforce each other.</p>
+
+            <h3>Alignment &mdash; the compass</h3>
+            <p>Without alignment, the other four pillars are just capabilities. Social Alignment gives the agent a conscience &mdash; five lenses that evaluate what kind of future each action creates. The agent doesn't follow rules blindly; it remembers why it chose, tracks when the human disagrees, and builds wisdom over time. When something is too big for the agent alone, it stops and asks. STOP always defers to the human &mdash; no exceptions, no timeouts. This is what makes the difference between a tool and a partner.</p>
         </section>
 
         <!-- What makes this different -->
@@ -490,14 +507,26 @@
             <p>secp256k1 Schnorr signatures (BIP-340), NIP-44 encryption, HMAC-SHA256 identity derivation. The same cryptographic stack that powers <a href="https://nostrkey.com">NostrKey</a> for humans powers OpenClaw for agents &mdash; backed by <a href="https://nse.dev">NSE</a> (Nostr Secure Enclave) for hardware-backed key protection across iOS, Android, server, and browser.</p>
 
             <h3>Active development</h3>
-            <p>This isn't abandoned-ware. All four packages are under active development, with new features shipping regularly. Built by <a href="https://humanjava.com">Humanjava</a> as part of the <a href="https://nse.dev">NSE</a> sovereign AI initiative.</p>
+            <p>This isn't abandoned-ware. All five pillar packages plus the orchestrator are under active development, security-audited, and shipping regularly. Built by <a href="https://humanjava.com">Humanjava</a> as part of the <a href="https://nse.dev">NSE</a> sovereign identity platform.</p>
         </section>
 
-        <!-- Docs link -->
-        <section style="text-align:center;padding:32px 0;">
-            <p style="color:var(--text-muted);margin-bottom:16px;">Full documentation &mdash; quick starts, code examples, API reference, and NIPs &mdash; lives on the developer hub:</p>
-            <div class="btn-group" style="justify-content:center;">
-                <a href="https://nse.dev/openclaw.html" class="btn btn-primary">OpenClaw Docs on nse.dev</a>
+        <!-- NSE Platform -->
+        <section>
+            <h2>The <span class="accent">NSE</span> Platform</h2>
+            <p class="subtitle">These five skills are part of a larger sovereign identity platform.</p>
+
+            <p>The <strong><a href="https://nse.dev">NSE (Nostr Secure Enclave)</a></strong> platform started as an npm package for hardware-protected Nostr keys. It grew into a complete identity system for AI agents and the humans beside them.</p>
+
+            <p>The <strong>NSE Orchestrator</strong> (<code>pip install nse-orchestrator[all]</code>) is the nervous system that wires all five pillars together. It doesn't make decisions &mdash; it makes sure every decision has full context:</p>
+
+            <p><strong>Cross-pillar checks</strong> catch what no single pillar sees: "I'm paying someone who isn't in my contacts." <strong>LLM trust profiles</strong> score every model response and track which models are reliable for which tasks. <strong>Coherence detection</strong> flags when two models contradict each other.</p>
+
+            <p>88 tests. Security-hardened against red team findings. Zero required dependencies &mdash; each pillar is optional.</p>
+
+            <div class="btn-group">
+                <a href="https://nse.dev" class="btn btn-primary">Learn more at nse.dev</a>
+                <a href="https://pypi.org/project/nse-orchestrator/" class="btn btn-secondary">PyPI</a>
+                <a href="https://clawhub.ai/vveerrgg/nse" class="btn btn-secondary">ClawHub</a>
             </div>
         </section>
 
@@ -537,7 +566,7 @@
         <!-- CTA -->
         <div style="text-align:center;padding:48px 0;">
             <h2 style="font-size:1.75rem;margin-bottom:12px;">Ready to forge your AI?</h2>
-            <p style="color:var(--text-muted);margin-bottom:24px;">Identity + wallet + calendar + relationships. Four pillars, sovereign AI.</p>
+            <p style="color:var(--text-muted);margin-bottom:24px;">Identity + wallet + calendar + relationships + alignment. Five pillars, one orchestrator, both sides sovereign.</p>
             <div class="btn-group" style="justify-content:center;">
                 <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="btn btn-primary">Back to skills</a>
                 <a href="https://github.com/HumanjavaEnterprises" class="btn btn-secondary">GitHub</a>
