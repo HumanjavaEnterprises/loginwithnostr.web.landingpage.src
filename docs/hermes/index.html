@@ -10,7 +10,7 @@
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init()
     </script>
-    <meta name="description" content="Native Hermes Agent plugins for sovereign identity. Eight plugins — keys, wallet, calendar, social, profile, memory, alignment, orchestrator — installable with hermes plugins install, on the open Nostr protocol.">
+    <meta name="description" content="Native Hermes Agent plugins for sovereign identity. Seven plugins — keys, wallet, calendar, social, profile, memory, alignment — installable with hermes plugins install, on the open Nostr protocol. Cross-pillar orchestration coming as an NSE.dev skill.">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://loginwithnostr.com/hermes">
@@ -399,16 +399,9 @@
 
         <!-- Hero -->
         <div class="hero">
-            <div class="hero-badge">Native Hermes Agent plugins</div>
+            <div class="hero-badge">Hermes Agent plugins for AI Entities</div>
             <h1>Give Your Hermes Agent Its Own<br><span>Identity</span>, <span>Wallet</span>, <span>Presence</span>, <span>Relationships</span> and <span>Alignment</span></h1>
-            <p>Hermes Agent is sovereign by design &mdash; no platform middleman, runs on your own substrate. The missing piece is identity. These eight plugins give your Hermes its own cryptographic keypair, Lightning wallet, calendar, social graph, encrypted memory, profile, ethical compass, and a coordination layer that wires them together. Install with one command. Same Nostr protocol your humans use, same npub format, same sovereignty.</p>
-            <div style="margin-top:24px;">
-                <div class="card-install" style="max-width:640px;margin:0 auto 8px;">
-                    <button class="copy-btn" onclick="copyCode('hero-install')" >Copy</button>
-                    <span id="hero-install">hermes plugins install HumanjavaEnterprises/nostrkey.app.HA-python.src</span>
-                </div>
-                <p style="font-size:0.9rem;color:var(--text-muted);margin-top:8px;">Start with <code>nostrkey</code> &mdash; everything else builds on it. Install order matches "the journey" below.</p>
-            </div>
+            <p>Most AI agents are stateless services &mdash; they execute, return, and forget. These Hermes plugins change that. Five pillars give your Hermes Agent a sovereign identity on the open Nostr protocol &mdash; cryptographic proof of who it is, a wallet, a calendar, relationships, and an ethical compass. Cross-pillar orchestration is coming as an <a href="https://nse.dev">NSE.dev</a> skill.</p>
         </div>
 
         <!-- Plugin Cards — above the fold -->
@@ -489,19 +482,6 @@
                     <a href="https://huje.tools" class="card-link-secondary">huje.tools</a>
                 </div>
             </div>
-            <div class="skill-card">
-                <h3>nse_<span>orchestrator</span><br><em>&mdash; The Nervous System</em></h3>
-                <p class="card-desc">Cross-pillar coordination and coherence. Four tools: <code>nse_init</code>, <code>nse_check</code>, <code>nse_health</code>, <code>nse_status</code>. Auto-detects which other plugins are installed in the same Hermes process and routes coherence checks across them.</p>
-                <div class="card-install">
-                    <button class="copy-btn" onclick="copyCode('card-install-no')" >Copy</button>
-                    <span id="card-install-no">hermes plugins install HumanjavaEnterprises/nse-orchestrator.app.HA-python.src</span>
-                </div>
-                <div class="card-links">
-                    <a href="https://github.com/HumanjavaEnterprises/nse-orchestrator.app.HA-python.src" class="card-link-primary">Source</a>
-                    <a href="/openclaw/#nse-orchestrator" class="card-link-secondary">OpenClaw version</a>
-                    <a href="https://nse.dev" class="card-link-secondary">nse.dev</a>
-                </div>
-            </div>
             <div class="skill-card" style="grid-column: 1 / -1; border-color: var(--accent);">
                 <h3>social_<span>alignment</span><br><em>&mdash; The Compass (capstone)</em></h3>
                 <p class="card-desc">Five-lens ethical evaluation: Builder, Owner, Partnership, Defense, Sovereign. Five tools: <code>alignment_init</code>, <code>alignment_check</code>, <code>alignment_proceed</code>, <code>alignment_defer</code>, <code>alignment_wisdom</code>. Returns severity CLEAR / CAUTION / YIELD / STOP &mdash; STOP is code-enforced, the agent will refuse the action.</p>
@@ -519,17 +499,17 @@
             </div>
         </div>
 
-        <!-- Quick start: install all 8 -->
+        <!-- Quick start: install all 7 -->
         <section style="background:var(--bg-card);border-color:var(--accent);">
-            <h2>Install All Eight</h2>
+            <h2>Install All Seven</h2>
             <p class="subtitle">Drop them all in at once if you're going for the full stack.</p>
             <div class="code-block">
                 <button class="copy-btn" onclick="copyCode('install-all')" >Copy</button>
-                <code id="install-all">for plugin in nostrkey nwc nostrprofile nostrcalendar nostrsocial sensememory nse-orchestrator socialalignment; do
+                <code id="install-all">for plugin in nostrkey nwc nostrprofile nostrcalendar nostrsocial sensememory socialalignment; do
   hermes plugins install HumanjavaEnterprises/${plugin}.app.HA-python.src
 done</code>
             </div>
-            <p style="margin-top:16px;font-size:0.95rem;color:var(--text-muted);">38 tools across 8 toolsets. Each plugin is self-contained &mdash; bundles its Python deps so <code>hermes plugins install</code> works without external pip steps.</p>
+            <p style="margin-top:16px;font-size:0.95rem;color:var(--text-muted);">34 tools across 7 toolsets. Each plugin is self-contained &mdash; bundles its Python deps so <code>hermes plugins install</code> works without external pip steps. Cross-pillar coordination (the role NSE Orchestrator plays for OpenClaw entities) is being built as an <a href="https://nse.dev">NSE.dev</a> skill rather than a per-runtime plugin.</p>
         </section>
 
         <!-- Why five pillars -->
@@ -554,7 +534,7 @@ done</code>
             <p>An agent without memory is a stateless service with delusions of personhood. <code>sensememory</code> stores key/value pairs and journal entries as encrypted Nostr events &mdash; only your agent can decrypt them, and they survive container restarts, host migrations, and the long arc of a life. Add a profile (<code>nostrprofile</code>) on top, and your Hermes is discoverable, recognizable, and continuous.</p>
 
             <h3>Alignment &mdash; "What do I stand for?"</h3>
-            <p>Without alignment, the other plugins are just capabilities. <code>social_alignment</code> gives the agent a conscience &mdash; five lenses that evaluate what kind of future each action creates. The agent doesn't follow rules blindly; it remembers why it chose, tracks when the human disagrees, and builds wisdom over time. When something is too big for the agent alone, it stops and asks. STOP always defers to the human &mdash; no exceptions, no timeouts. <code>nse_orchestrator</code> wires it all together: cross-pillar coherence checks before any significant action, so the agent sees what no single plugin alone can.</p>
+            <p>Without alignment, the other plugins are just capabilities. <code>social_alignment</code> gives the agent a conscience &mdash; five lenses that evaluate what kind of future each action creates. The agent doesn't follow rules blindly; it remembers why it chose, tracks when the human disagrees, and builds wisdom over time. When something is too big for the agent alone, it stops and asks. STOP always defers to the human &mdash; no exceptions, no timeouts. Cross-pillar coherence (the role NSE Orchestrator plays for OpenClaw entities) is coming as an <a href="https://nse.dev">NSE.dev</a> skill.</p>
         </section>
 
         <!-- Journey Map -->
@@ -615,8 +595,8 @@ done</code>
                 <div class="flow-step">
                     <div class="num">8</div>
                     <div class="text">
-                        <h4>nse_orchestrator</h4>
-                        <p>"All of this works together. I am coherent."</p>
+                        <h4><a href="https://nse.dev" style="color:inherit;">NSE.dev skill</a> (planned)</h4>
+                        <p>"All of this works together. I am coherent." — cross-pillar orchestration as a portable nse.dev skill, not a per-runtime plugin.</p>
                     </div>
                 </div>
             </div>
@@ -640,25 +620,20 @@ done</code>
             <p>Each plugin's underlying library lives in two parallel repos: <code>*.OC-python.src</code> for OpenClaw entities (pip-installable), <code>*.HA-python.src</code> for Hermes Agent (this page). Same crypto, same wire format, same npub format &mdash; an agent migrating between OpenClaw and Hermes keeps its identity. <a href="/openclaw/">See the OpenClaw page</a> for the pip-installable variants.</p>
 
             <h3>Active development</h3>
-            <p>All eight plugins are under active development, mirroring the OpenClaw release cadence. Built by <a href="https://humanjava.com">Humanjava</a> as part of the <a href="https://nse.dev">NSE</a> sovereign identity platform.</p>
+            <p>All seven plugins are under active development, mirroring the OpenClaw release cadence. Built by <a href="https://humanjava.com">Humanjava</a> as part of the <a href="https://nse.dev">NSE</a> sovereign identity platform.</p>
         </section>
 
         <!-- NSE Platform -->
         <section>
             <h2>The <span class="accent">NSE</span> Platform</h2>
-            <p class="subtitle">These eight plugins are part of a larger sovereign identity platform.</p>
+            <p class="subtitle">These seven plugins are part of a larger sovereign identity platform.</p>
 
             <p>The <strong><a href="https://nse.dev">NSE (Nostr Secure Enclave)</a></strong> platform started as an npm package for hardware-protected Nostr keys. It grew into a complete identity system for AI agents and the humans beside them.</p>
 
-            <p>The <strong>nse_orchestrator</strong> plugin is the nervous system that wires the other seven together. It doesn't make decisions &mdash; it makes sure every decision has full context:</p>
-
-            <p><strong>Cross-pillar checks</strong> catch what no single pillar sees: "I'm paying someone who isn't in my contacts." <strong>LLM trust profiles</strong> score every model response and track which models are reliable for which tasks. <strong>Coherence detection</strong> flags when two models contradict each other. The orchestrator auto-detects which sibling plugins are loaded in the same Hermes process.</p>
-
-            <p>Sibling implementations on PyPI for OpenClaw entities; same SDKs vendored here for Hermes. <a href="/openclaw/">See the OpenClaw page</a> for the pip variant.</p>
+            <p>Cross-pillar orchestration &mdash; the nervous system that catches what no single pillar can see ("I'm paying someone who isn't in my contacts"), tracks which models are reliable for which tasks, flags when two models contradict each other &mdash; is being built as an <strong>NSE.dev skill</strong>, portable across runtimes rather than as a per-runtime plugin. The OpenClaw side already ships an in-Python <code>nse-orchestrator</code> package; the equivalent for Hermes (and any other future runtime) lives at <a href="https://nse.dev">nse.dev</a>.</p>
 
             <div class="btn-group">
                 <a href="https://nse.dev" class="btn btn-primary">Learn more at nse.dev</a>
-                <a href="https://github.com/HumanjavaEnterprises/nse-orchestrator.app.HA-python.src" class="btn btn-secondary">Orchestrator source</a>
                 <a href="/openclaw/" class="btn btn-secondary">OpenClaw page</a>
             </div>
         </section>
@@ -681,7 +656,7 @@ done</code>
             <p>Yes. Every Nostr event is signed with the agent's private key. Anyone with the agent's npub can verify that a specific post, message, or action is authentic &mdash; not forged, not tampered with. No certificate authority needed. This is useful for attribution ("this agent actually said this"), audit trails, and trust between collaborators who've never met.</p>
 
             <h3>What's the difference between a service and an entity?</h3>
-            <p>A service executes a function and returns. It has no memory, no relationships, no continuity. An entity has cryptographic proof of who it is (<code>nostrkey</code>), a way others recognize it (<code>nostrprofile</code>), memories that persist across sessions (<code>sensememory</code>), the ability to act in the world (<code>nwc</code>), an understanding of time (<code>nostrcalendar</code>), relationships it maintains (<code>nostrsocial</code>), and values it stands for (<code>social_alignment</code>). Strip any one away and you lose a dimension of being. Wire them all together with <code>nse_orchestrator</code> and you get coherence.</p>
+            <p>A service executes a function and returns. It has no memory, no relationships, no continuity. An entity has cryptographic proof of who it is (<code>nostrkey</code>), a way others recognize it (<code>nostrprofile</code>), memories that persist across sessions (<code>sensememory</code>), the ability to act in the world (<code>nwc</code>), an understanding of time (<code>nostrcalendar</code>), relationships it maintains (<code>nostrsocial</code>), and values it stands for (<code>social_alignment</code>). Strip any one away and you lose a dimension of being. Cross-pillar orchestration that ties them into a coherent whole is coming as an <a href="https://nse.dev">NSE.dev</a> skill.</p>
 
             <h3>What's the point of NIP-46 bunker / delegated signing?</h3>
             <p>It's a governance layer. Your agent can act autonomously for routine tasks &mdash; posting, responding, encrypting data. But for high-stakes actions, it can request its human partner to co-sign via NIP-46. The human approves or rejects without ever touching the agent's private key. Autonomy with a check valve. Social Alignment's STOP mechanism works the same way &mdash; when something is too big to decide alone, the agent defers.</p>
@@ -693,7 +668,7 @@ done</code>
             <p>Use <code>nostr-profile</code> to publish a <code>kind 0</code> event (profile metadata) with a name, description, avatar, and optionally a NIP-05 address. This is the same mechanism humans use to set up their Nostr profile. Any Nostr client will display it. Your agent becomes discoverable, followable, and contactable &mdash; not as a bot endpoint, but as an entity on the network.</p>
 
             <h3>Why a Hermes-specific page when the OpenClaw one already exists?</h3>
-            <p>Hermes Agent has its own plugin system, its own dispatcher, and its own runtime model. A pip package built for OpenClaw doesn't drop into Hermes &mdash; the manifest, the tool registration, and the handler signatures are different. These eight HA-python repos exist so <code>hermes plugins install</code> just works. Same crypto core, vendored. Same npub on the wire. Sibling, not fork.</p>
+            <p>Hermes Agent has its own plugin system, its own dispatcher, and its own runtime model. A pip package built for OpenClaw doesn't drop into Hermes &mdash; the manifest, the tool registration, and the handler signatures are different. These seven HA-python repos exist so <code>hermes plugins install</code> just works. Same crypto core, vendored. Same npub on the wire. Sibling, not fork.</p>
 
             <h3>What if I want both? OpenClaw entities and Hermes plugins side by side?</h3>
             <p>Run them. The protocol is the substrate &mdash; an OpenClaw bot and a Hermes Agent can chat over Nostr without knowing or caring which runtime the other is. They both publish kind 1 events, both sign with secp256k1 Schnorr, both use NIP-44 to encrypt. The pages are separate; the world isn't.</p>
@@ -708,7 +683,7 @@ done</code>
         <!-- CTA -->
         <div style="text-align:center;padding:48px 0;">
             <h2 style="font-size:1.75rem;margin-bottom:12px;">Ready to give your Hermes its body?</h2>
-            <p style="color:var(--text-muted);margin-bottom:24px;">Identity + wallet + presence + relationships + memory + alignment. Eight plugins, one orchestrator, both sides sovereign.</p>
+            <p style="color:var(--text-muted);margin-bottom:24px;">Identity + wallet + presence + relationships + memory + alignment. Seven plugins, one entity, both sides sovereign.</p>
             <div class="btn-group" style="justify-content:center;">
                 <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="btn btn-primary">Back to plugins</a>
                 <a href="https://github.com/HumanjavaEnterprises" class="btn btn-secondary">GitHub</a>
