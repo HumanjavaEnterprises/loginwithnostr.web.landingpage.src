@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#0f172a">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build on Nostr — The Humanjava Nostr library family for developers</title>
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-cCKIG9VgnWbPbDut0ABYe.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <meta name="description" content="A self-contained family of Nostr libraries for developers — TypeScript/npm for apps, Python/OpenClaw skills for AI agents. Identity, wallet, calendar, relationships, memory. MIT licensed.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://loginwithnostr.com/developers/">
+    <meta property="og:title" content="Build on Nostr — Developer Hub">
+    <meta property="og:description" content="One family of libraries for putting Nostr into real software — from a login button to a fully sovereign AI agent.">
+    <meta property="og:image" content="https://loginwithnostr.com/developers/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Build on Nostr — Developer Hub">
+    <meta name="twitter:description" content="TypeScript libraries for apps, Python/OpenClaw skills for AI agents. Self-contained, MIT licensed.">
+    <meta name="twitter:image" content="https://loginwithnostr.com/developers/og-image.png">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' stroke='%23fbbf24' stroke-width='4' fill='%231e293b'/><path d='M30 50h40M50 30v40' stroke='%23fbbf24' stroke-width='6' stroke-linecap='round' fill='none'/></svg>">
+
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-code: #0d1117;
+            --accent: #fbbf24;
+            --accent-dim: rgba(251, 191, 36, 0.15);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-code: #e2e8f0;
+            --border: #334155;
+            --green: #4ade80;
+            --blue: #79c0ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; width: 100%; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+        .narrow { max-width: 720px; }
+
+        /* Top bar */
+        .topbar {
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 20;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: saturate(150%) blur(10px);
+        }
+        .topbar .inner {
+            max-width: 1040px; margin: 0 auto; padding: 14px 24px;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+        }
+        .topbar .brand { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+        .topbar .brand span { color: var(--accent); }
+        .topbar nav { display: flex; gap: 20px; font-size: 0.9rem; }
+        .topbar nav a { color: var(--text-muted); }
+        .topbar nav a:hover { color: var(--text); text-decoration: none; }
+        @media (max-width: 640px) { .topbar nav { display: none; } }
+
+        /* Hero */
+        .hero { text-align: center; padding: 72px 0 40px; }
+        .hero-badge {
+            display: inline-block; background: var(--accent-dim); color: var(--accent);
+            padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin-bottom: 22px;
+        }
+        .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.08; margin-bottom: 18px; letter-spacing: -0.02em; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 640px; margin: 0 auto; }
+        .hero p code { color: var(--text-code); background: var(--bg-card); padding: 1px 6px; border-radius: 5px; font-size: 0.9em; }
+
+        .stat-strip {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px;
+            margin: 36px auto 0; max-width: 720px;
+        }
+        .stat { text-align: center; }
+        .stat b { display: block; font-size: 1.6rem; color: var(--accent); font-weight: 800; line-height: 1.1; }
+        .stat small { color: var(--text-muted); font-size: 0.8rem; }
+
+        /* Path cards */
+        .paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 48px 0 12px; }
+        .path {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+            display: block; color: var(--text); transition: transform .15s, border-color .15s;
+        }
+        .path:hover { transform: translateY(-3px); border-color: var(--accent); text-decoration: none; }
+        .path .k { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 700; }
+        .path h3 { font-size: 1.15rem; margin: 6px 0 8px; }
+        .path p { color: var(--text-muted); font-size: 0.9rem; }
+        .path .go { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-top: 12px; display: inline-block; }
+
+        /* Section */
+        section { padding: 56px 0; border-top: 1px solid var(--border); }
+        .sec-head { margin-bottom: 28px; }
+        .sec-eyebrow { font-size: 0.78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 700; }
+        .sec-head h2 { font-size: 1.9rem; font-weight: 800; margin: 8px 0 10px; letter-spacing: -0.01em; }
+        .sec-head p { color: var(--text-muted); max-width: 680px; }
+        .sec-head p code { color: var(--text-code); background: var(--bg-card); padding: 1px 6px; border-radius: 5px; font-size: 0.9em; }
+
+        /* Table */
+        .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card); }
+        table.libs { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 640px; }
+        table.libs thead th {
+            text-align: left; padding: 14px 18px; color: var(--text-muted);
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+            border-bottom: 1px solid var(--border); white-space: nowrap;
+        }
+        table.libs tbody td { padding: 16px 18px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        table.libs tbody tr:last-child td { border-bottom: none; }
+        table.libs tbody tr:hover td { background: rgba(148, 163, 184, 0.04); }
+        .pkg-name { font-weight: 700; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 0.9rem; }
+        .pkg-name a { color: var(--text); }
+        .pkg-name a:hover { color: var(--accent); text-decoration: none; }
+        .pkg-tag { display: block; color: var(--text-muted); font-size: 0.82rem; font-weight: 400; margin-top: 3px; line-height: 1.4; }
+        .ver { font-family: 'SF Mono', monospace; font-size: 0.72rem; color: var(--accent); background: var(--accent-dim); padding: 1px 7px; border-radius: 20px; margin-left: 6px; vertical-align: middle; }
+        .kernel-pill { font-size: 0.65rem; text-transform: uppercase; letter-spacing: .06em; color: var(--bg); background: var(--accent); padding: 1px 7px; border-radius: 20px; margin-left: 6px; font-weight: 800; vertical-align: middle; }
+        .nips { margin-top: 8px; }
+        .nip { display: inline-block; font-family: 'SF Mono', monospace; font-size: 0.68rem; color: var(--blue);
+               border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; margin: 2px 4px 0 0; }
+        .install { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 0.8rem; color: var(--text-code);
+                   background: var(--bg-code); border: 1px solid var(--border); border-radius: 7px; padding: 7px 10px;
+                   display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .install .cp { cursor: pointer; color: var(--text-muted); font-size: 0.72rem; border: none; background: none; padding: 0; }
+        .install .cp:hover { color: var(--accent); }
+        .links { white-space: nowrap; }
+        .links a { font-size: 0.82rem; margin-right: 12px; color: var(--text-muted); }
+        .links a:hover { color: var(--accent); text-decoration: none; }
+
+        /* Pillars */
+        .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 8px 0 32px; }
+        .pillar { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+        .pillar .icon { font-size: 1.3rem; }
+        .pillar h4 { font-size: 0.95rem; margin: 6px 0 2px; }
+        .pillar .who { font-family: 'SF Mono', monospace; font-size: 0.72rem; color: var(--accent); }
+        .pillar p { color: var(--text-muted); font-size: 0.8rem; margin-top: 6px; line-height: 1.45; }
+        .orchestrator-note {
+            background: linear-gradient(180deg, var(--accent-dim), transparent); border: 1px solid var(--border);
+            border-radius: 12px; padding: 18px 22px; margin-bottom: 32px; font-size: 0.92rem; color: var(--text-muted);
+        }
+        .orchestrator-note b { color: var(--text); }
+        .orchestrator-note code { color: var(--accent); font-family: 'SF Mono', monospace; font-size: 0.85em; }
+
+        /* Quickstart split */
+        .qs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+        @media (max-width: 720px) { .qs { grid-template-columns: 1fr; } }
+        .qs-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+        .qs-card h4 { font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .code-block {
+            background: var(--bg-code); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px;
+            overflow-x: auto; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 0.82rem;
+            line-height: 1.6; color: var(--text-code); position: relative;
+        }
+        .code-block .comment { color: #6a737d; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .func { color: #d2a8ff; }
+        .copy-btn { position: absolute; top: 10px; right: 10px; background: var(--border); color: var(--text-muted);
+                    border: none; border-radius: 6px; padding: 3px 9px; font-size: 0.72rem; cursor: pointer; }
+        .copy-btn:hover { background: #475569; color: var(--text); }
+
+        /* Dev / roadmap cards */
+        .dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .dev-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .dev-card h4 { font-size: 0.95rem; font-family: 'SF Mono', monospace; margin-bottom: 4px; }
+        .badge-soon { font-size: 0.66rem; text-transform: uppercase; letter-spacing: .06em; color: #fb923c;
+                      border: 1px solid #fb923c; border-radius: 20px; padding: 1px 8px; font-weight: 700; }
+        .dev-card p { color: var(--text-muted); font-size: 0.85rem; margin-top: 8px; }
+
+        /* CTA + footer */
+        .cta { text-align: center; padding: 64px 0 32px; }
+        .cta h2 { font-size: 1.75rem; margin-bottom: 12px; }
+        .cta p { color: var(--text-muted); margin-bottom: 24px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 10px;
+               font-size: 0.98rem; font-weight: 600; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.3); text-decoration: none; }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-secondary { background: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
+        .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; }
+        footer a { color: var(--text-muted); }
+        footer a:hover { color: var(--text); }
+
+        @media (max-width: 640px) {
+            .hero { padding: 48px 0 32px; }
+            .hero h1 { font-size: 2.1rem; }
+            .sec-head h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="inner">
+            <a class="brand" href="/">Login with <span>Nostr</span></a>
+            <nav>
+                <a href="#npm">TypeScript</a>
+                <a href="#openclaw">AI Agents</a>
+                <a href="#roadmap">In Development</a>
+                <a href="https://github.com/HumanjavaEnterprises">GitHub</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-badge">Developer Hub &middot; MIT Licensed &middot; Dogfooded in production</div>
+            <h1>Build on <span>Nostr</span></h1>
+            <p>One family of libraries for putting Nostr into real software &mdash; from a login button to a fully sovereign AI agent. A self-contained stack: every layer is ours, from the <code>secp256k1</code> primitives up &mdash; minimal dependencies, no lock-in.</p>
+            <div class="stat-strip">
+                <div class="stat"><b>17</b><small>published packages</small></div>
+                <div class="stat"><b>8</b><small>TypeScript libraries</small></div>
+                <div class="stat"><b>9</b><small>AI-agent skills</small></div>
+                <div class="stat"><b>MIT</b><small>throughout</small></div>
+            </div>
+        </div>
+
+        <!-- Choose your path -->
+        <div class="paths">
+            <a class="path" href="/">
+                <div class="k">I have a website</div>
+                <h3>Add a login button</h3>
+                <p>Passwordless Nostr auth in two lines. No backend, no OAuth, no password database.</p>
+                <span class="go">Login with Nostr &rarr;</span>
+            </a>
+            <a class="path" href="#npm">
+                <div class="k">I'm building an app</div>
+                <h3>TypeScript &amp; Node</h3>
+                <p>Sign events, manage keys and seed phrases, talk to relays, verify NIP-05. Fully typed, ESM + CJS.</p>
+                <span class="go">Browse the libraries &rarr;</span>
+            </a>
+            <a class="path" href="#openclaw">
+                <div class="k">I'm building an agent</div>
+                <h3>Python &amp; OpenClaw</h3>
+                <p>Give your AI its own identity, Lightning wallet, calendar, memory, and social graph.</p>
+                <span class="go">Browse the skills &rarr;</span>
+            </a>
+        </div>
+
+        <!-- ================= npm ================= -->
+        <section id="npm">
+            <div class="sec-head">
+                <div class="sec-eyebrow">TypeScript &middot; npm</div>
+                <h2>Libraries for apps &amp; relays</h2>
+                <p>Eight published TypeScript libraries. Noble-based cryptography, dual ESM/CommonJS, fully typed. <code>nostr-crypto-utils</code> is the kernel every other library and the login button build on &mdash; start there.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="libs">
+                    <thead>
+                        <tr><th>Package</th><th>Standards</th><th>Install</th><th>Links</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/nostr-crypto-utils">nostr-crypto-utils</a></span><span class="ver">0.8.0</span><span class="kernel-pill">kernel</span>
+                                <span class="pkg-tag">Core cryptographic primitives &mdash; keys, signing, encryption, encoding. Everything else depends on it.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">BIP-340</span><span class="nip">NIP-01</span><span class="nip">NIP-04</span><span class="nip">NIP-19</span><span class="nip">NIP-44</span><span class="nip">NIP-46</span><span class="nip">NIP-49</span></div></td>
+                            <td><span class="install"><span>npm i nostr-crypto-utils</span><button class="cp" onclick="cp(this,'npm install nostr-crypto-utils')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/nostr-crypto-utils">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostr-crypto-utils">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/nostr-nsec-seedphrase">nostr-nsec-seedphrase</a></span><span class="ver">0.8.0</span>
+                                <span class="pkg-tag">BIP-39 seed phrases and full key management. Derive, back up, and restore Nostr identities.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">NIP-01</span><span class="nip">NIP-06</span><span class="nip">NIP-19</span><span class="nip">NIP-26</span></div></td>
+                            <td><span class="install"><span>npm i nostr-nsec-seedphrase</span><button class="cp" onclick="cp(this,'npm install nostr-nsec-seedphrase')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/nostr-nsec-seedphrase">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostr-nsec-seedphrase">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/nostr-auth-middleware">nostr-auth-middleware</a></span><span class="ver">0.6.0</span>
+                                <span class="pkg-tag">Security-first authentication middleware with challenge-binding. Drop it into your Node backend.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">NIP-07</span><span class="nip">NIP-98</span></div></td>
+                            <td><span class="install"><span>npm i nostr-auth-middleware</span><button class="cp" onclick="cp(this,'npm install nostr-auth-middleware')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/nostr-auth-middleware">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostr-auth-middleware">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/nostr-websocket-utils">nostr-websocket-utils</a></span><span class="ver">0.5.0</span>
+                                <span class="pkg-tag">Resilient relay WebSockets &mdash; auto-reconnect, heartbeat, channels, and a message queue.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">NIP-01</span></div></td>
+                            <td><span class="install"><span>npm i nostr-websocket-utils</span><button class="cp" onclick="cp(this,'npm install nostr-websocket-utils')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/nostr-websocket-utils">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostr-websocket-utils">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/nostr-dm-magiclink-utils">nostr-dm-magiclink-utils</a></span><span class="ver">0.4.0</span>
+                                <span class="pkg-tag">Passwordless magic-link auth over encrypted Nostr DMs. Multi-relay, i18n-ready.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">NIP-01</span><span class="nip">NIP-04</span></div></td>
+                            <td><span class="install"><span>npm i nostr-dm-magiclink-utils</span><button class="cp" onclick="cp(this,'npm install nostr-dm-magiclink-utils')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/nostr-dm-magiclink-utils">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostr-dm-magiclink-utils">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/nostr-biometric-auth-utils">nostr-biometric-auth-utils</a></span><span class="ver">0.2.2</span>
+                                <span class="pkg-tag">WebAuthn biometric auth for Nostr &mdash; Face ID / Touch ID / passkeys as a second factor.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">WebAuthn</span></div></td>
+                            <td><span class="install"><span>npm i nostr-biometric-auth-utils</span><button class="cp" onclick="cp(this,'npm install nostr-biometric-auth-utils')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/nostr-biometric-auth-utils">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostr-biometric-auth-utils">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/nostr-metadata-utils">nostr-metadata-utils</a></span><span class="ver">0.2.2</span>
+                                <span class="pkg-tag">NIP-05 identifier verification and badge metadata generation.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">NIP-05</span></div></td>
+                            <td><span class="install"><span>npm i nostr-metadata-utils</span><button class="cp" onclick="cp(this,'npm install nostr-metadata-utils')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/nostr-metadata-utils">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostr-metadata-utils">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pkg-name"><a href="https://www.npmjs.com/package/node-red-contrib-nostr">node-red-contrib-nostr</a></span><span class="ver">0.3.0</span>
+                                <span class="pkg-tag">Node-RED nodes for no-code Nostr flows &mdash; publish, subscribe, filter, and route by npub.</span>
+                            </td>
+                            <td><div class="nips"><span class="nip">NIP-01</span><span class="nip">Node-RED</span></div></td>
+                            <td><span class="install"><span>npm i node-red-contrib-nostr</span><button class="cp" onclick="cp(this,'npm install node-red-contrib-nostr')">copy</button></span></td>
+                            <td class="links"><a href="https://www.npmjs.com/package/node-red-contrib-nostr">npm&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/node-red-contrib-nostr">source&nbsp;&nearr;</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="qs">
+                <div class="qs-card">
+                    <h4>&#9889; 30-second start</h4>
+                    <div class="code-block" id="ts-start">
+                        <button class="copy-btn" onclick="cpBlock('ts-start')">Copy</button>
+<span class="keyword">import</span> { generateKeyPair, signEvent } <span class="keyword">from</span> <span class="string">'nostr-crypto-utils'</span>;
+
+<span class="keyword">const</span> keys = <span class="func">generateKeyPair</span>();
+<span class="keyword">const</span> event = <span class="keyword">await</span> <span class="func">signEvent</span>({
+  kind: <span class="string">1</span>,
+  content: <span class="string">'Hello, Nostr'</span>,
+}, keys.privateKey);
+<span class="comment">// event.sig is a valid BIP-340 signature</span></div>
+                </div>
+                <div class="qs-card">
+                    <h4>&#128273; Seed phrase backup</h4>
+                    <div class="code-block" id="ts-seed">
+                        <button class="copy-btn" onclick="cpBlock('ts-seed')">Copy</button>
+<span class="keyword">import</span> { generateSeedPhrase, seedToKeyPair }
+  <span class="keyword">from</span> <span class="string">'nostr-nsec-seedphrase'</span>;
+
+<span class="keyword">const</span> phrase = <span class="func">generateSeedPhrase</span>();  <span class="comment">// 12 words</span>
+<span class="keyword">const</span> keys = <span class="func">seedToKeyPair</span>(phrase); <span class="comment">// NIP-06 path</span>
+<span class="comment">// Same phrase → same keys, forever.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= OpenClaw ================= -->
+        <section id="openclaw">
+            <div class="sec-head">
+                <div class="sec-eyebrow">Python &middot; OpenClaw skills</div>
+                <h2>Skills for AI agents</h2>
+                <p>These aren't a grab-bag. Each skill is a <strong>pillar</strong> of a sovereign entity &mdash; the faculties an autonomous agent needs to act, transact, plan, remember, and relate on an open network. Install what you need; wire them together with the orchestrator.</p>
+            </div>
+
+            <!-- Pillars -->
+            <div class="pillars">
+                <div class="pillar"><div class="icon">&#128273;</div><h4>Identity</h4><div class="who">nostrkey &middot; nostr-profile</div><p>Its own keypair. Sign events, encrypt data, publish a profile.</p></div>
+                <div class="pillar"><div class="icon">&#9889;</div><h4>Finance</h4><div class="who">nostrwalletconnect</div><p>A Lightning wallet. Pay and create invoices over NIP-47.</p></div>
+                <div class="pillar"><div class="icon">&#128197;</div><h4>Time</h4><div class="who">nostrcalendar</div><p>Read availability, book meetings, negotiate times over relay.</p></div>
+                <div class="pillar"><div class="icon">&#129309;</div><h4>Relationships</h4><div class="who">nostrsocial</div><p>A social graph with trust tiers and identity verification.</p></div>
+                <div class="pillar"><div class="icon">&#129504;</div><h4>Perception</h4><div class="who">sense-memory &middot; sense-music</div><p>Encrypted long-term memory, and audio turned into structured sense.</p></div>
+            </div>
+
+            <div class="orchestrator-note">
+                <b>&#127760; nse-orchestrator</b> is the nervous system &mdash; it wires identity, wallet, calendar, relationships, and perception into one coherent being. Reach for it when your agent needs to be more than the sum of its skills. <code>pip install nse-orchestrator</code>
+            </div>
+
+            <div class="table-wrap">
+                <table class="libs">
+                    <thead>
+                        <tr><th>Skill</th><th>Pillar</th><th>Install</th><th>Links</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/nostrkey/">nostrkey</a></span><span class="ver">0.3.4</span>
+                                <span class="pkg-tag">Nostr identity for AI agents &mdash; generate keys, sign events, encrypt data, run a NIP-46 bunker.</span></td>
+                            <td><span class="nip">identity</span></td>
+                            <td><span class="install"><span>pip install nostrkey</span><button class="cp" onclick="cp(this,'pip install nostrkey')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/nostrkey/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/nostrkey">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostrkey.app.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/nostr-profile/">nostr-profile</a></span><span class="ver">0.2.1</span>
+                                <span class="pkg-tag">Kind-0 profile management &mdash; publish, read, and update your agent's metadata.</span></td>
+                            <td><span class="nip">identity</span></td>
+                            <td><span class="install"><span>pip install nostr-profile</span><button class="cp" onclick="cp(this,'pip install nostr-profile')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/nostr-profile/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/nostr-profile">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/huje.nostrprofile.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/nostrwalletconnect/">nostrwalletconnect</a></span><span class="ver">0.2.0</span>
+                                <span class="pkg-tag">Nostr Wallet Connect (NIP-47) &mdash; pay invoices, check balance, create invoices.</span></td>
+                            <td><span class="nip">finance</span></td>
+                            <td><span class="install"><span>pip install nostrwalletconnect</span><button class="cp" onclick="cp(this,'pip install nostrwalletconnect')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/nostrwalletconnect/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/nostrwalletconnect">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nwc.app.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/nostrcalendar/">nostrcalendar</a></span><span class="ver">0.2.4</span>
+                                <span class="pkg-tag">Nostr-native scheduling &mdash; read availability, book meetings, negotiate times over relay.</span></td>
+                            <td><span class="nip">time</span></td>
+                            <td><span class="install"><span>pip install nostrcalendar</span><button class="cp" onclick="cp(this,'pip install nostrcalendar')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/nostrcalendar/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/nostrcalendar">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostrcalendar.app.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/nostrsocial/">nostrsocial</a></span><span class="ver">0.1.4</span>
+                                <span class="pkg-tag">Social graph manager &mdash; contacts, trust tiers, and identity verification over Nostr.</span></td>
+                            <td><span class="nip">relationships</span></td>
+                            <td><span class="install"><span>pip install nostrsocial</span><button class="cp" onclick="cp(this,'pip install nostrsocial')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/nostrsocial/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/nostrsocial">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nostrsocial.app.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/sense-memory/">sense-memory</a></span><span class="ver">0.2.1</span>
+                                <span class="pkg-tag">Sovereign persistence &mdash; encrypted long-term memories stored on Nostr relays.</span></td>
+                            <td><span class="nip">perception</span></td>
+                            <td><span class="install"><span>pip install sense-memory</span><button class="cp" onclick="cp(this,'pip install sense-memory')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/sense-memory/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/sense-memory">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/huje.sensememory.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/sense-music/">sense-music</a></span><span class="ver">0.1.6</span>
+                                <span class="pkg-tag">Turn audio into structured analysis and annotated visualizations for AI perception.</span></td>
+                            <td><span class="nip">perception</span></td>
+                            <td><span class="install"><span>pip install sense-music</span><button class="cp" onclick="cp(this,'pip install sense-music')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/sense-music/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/sense-music">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/huje.sensemusic.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/socialcard/">socialcard</a></span><span class="ver">0.1.3</span>
+                                <span class="pkg-tag">Generate beautiful social card images (OG, Twitter, GitHub) with a builder API.</span></td>
+                            <td><span class="nip">tool</span></td>
+                            <td><span class="install"><span>pip install socialcard</span><button class="cp" onclick="cp(this,'pip install socialcard')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/socialcard/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/socialcard">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pkg-name"><a href="https://pypi.org/project/nse-orchestrator/">nse-orchestrator</a></span><span class="ver">0.2.3</span>
+                                <span class="pkg-tag">The orchestrator &mdash; wires identity, wallet, calendar, relationships, and alignment into one entity.</span></td>
+                            <td><span class="nip">orchestrator</span></td>
+                            <td><span class="install"><span>pip install nse-orchestrator</span><button class="cp" onclick="cp(this,'pip install nse-orchestrator')">copy</button></span></td>
+                            <td class="links"><a href="https://pypi.org/project/nse-orchestrator/">PyPI&nbsp;&nearr;</a><a href="https://clawhub.ai/skills/nse">ClawHub&nbsp;&nearr;</a><a href="https://github.com/HumanjavaEnterprises/nse-orchestrator.app.OC-python.src">source&nbsp;&nearr;</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="qs">
+                <div class="qs-card">
+                    <h4>&#129302; Give your agent an identity</h4>
+                    <div class="code-block" id="py-id">
+                        <button class="copy-btn" onclick="cpBlock('py-id')">Copy</button>
+<span class="keyword">from</span> nostrkey <span class="keyword">import</span> Identity
+
+bot = Identity.<span class="func">generate</span>()
+event = bot.<span class="func">sign_event</span>(
+    kind=<span class="string">1</span>,
+    content=<span class="string">"Hello from an AI"</span>,
+)
+<span class="comment"># The bot owns its own keys. No human in the loop.</span></div>
+                </div>
+                <div class="qs-card">
+                    <h4>&#9889; ...and a wallet</h4>
+                    <div class="code-block" id="py-pay">
+                        <button class="copy-btn" onclick="cpBlock('py-pay')">Copy</button>
+<span class="keyword">from</span> nostrwalletconnect <span class="keyword">import</span> NWCClient
+
+wallet = NWCClient(<span class="string">"nostr+walletconnect://..."</span>)
+<span class="keyword">await</span> wallet.<span class="func">pay_invoice</span>(<span class="string">"lnbc..."</span>)
+balance = <span class="keyword">await</span> wallet.<span class="func">get_balance</span>()
+<span class="comment"># Your agent can now transact on its own.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= In development ================= -->
+        <section id="roadmap">
+            <div class="sec-head">
+                <div class="sec-eyebrow">On the workbench</div>
+                <h2>In development</h2>
+                <p>Code-complete and staged, not yet on the registries. Listed here so you know what's coming &mdash; we don't advertise an install command until the package is actually live.</p>
+            </div>
+            <div class="dev-grid">
+                <div class="dev-card">
+                    <h4>nostr-secure-enclave <span class="badge-soon">soon</span></h4>
+                    <p>Hardware-backed key management &mdash; WebAuthn + SubtleCrypto key wrapping for secp256k1, with core / server / browser builds. The strongest tier of the trust ladder. See <a href="https://nse.dev">nse.dev</a>.</p>
+                </div>
+                <div class="dev-card">
+                    <h4>social-alignment <span class="badge-soon">soon</span></h4>
+                    <p>A deterministic five-lens pre-action compass for sovereign AI agents &mdash; the alignment pillar. Code-complete, publish pending.</p>
+                </div>
+                <div class="dev-card">
+                    <h4>nostrkey (Hermes plugin) <span class="badge-soon">soon</span></h4>
+                    <p>A Hermes Agent plugin giving your agent a Nostr identity &mdash; keypairs, signing, encrypt-to-disk, and gated key export with audit logging. Seven tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta">
+            <h2>Everything's open source</h2>
+            <p>MIT licensed, on GitHub, and driven by a single public registry. Star it, fork it, file an issue.</p>
+            <div class="btn-group">
+                <a href="https://github.com/HumanjavaEnterprises" class="btn btn-primary">View on GitHub</a>
+                <a href="/" class="btn btn-secondary">Back to Login with Nostr</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>
+                Powered by <a href="https://nostrkey.com">NostrKey</a> &middot;
+                <a href="/openclaw">OpenClaw</a> &middot;
+                <a href="https://nse.dev">NSE</a> &middot;
+                <a href="https://github.com/HumanjavaEnterprises">GitHub</a>
+            </p>
+            <p style="margin-top:8px;">
+                <a href="/openclaw/privacy/">Privacy</a> &middot;
+                <a href="/openclaw/terms/">Terms</a> &middot;
+                <a href="/openclaw/support/">Support</a>
+            </p>
+            <p style="margin-top:12px;">&copy; 2026 <a href="https://humanjava.com">Humanjava Enterprises Inc.</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Copy an inline install string
+        function cp(btn, text) {
+            navigator.clipboard.writeText(text).then(function () {
+                var old = btn.textContent;
+                btn.textContent = 'copied';
+                setTimeout(function () { btn.textContent = old; }, 1200);
+            });
+        }
+        // Copy a full code block (strip the button label)
+        function cpBlock(id) {
+            var block = document.getElementById(id);
+            var text = block.textContent.replace(/^\s*Copy\s*/, '').trim();
+            navigator.clipboard.writeText(text).then(function () {
+                var btn = block.querySelector('.copy-btn');
+                if (btn) { btn.textContent = 'Copied!'; setTimeout(function () { btn.textContent = 'Copy'; }, 1400); }
+            });
+        }
+    </script>
+</body>
+</html>

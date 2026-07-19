@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Build on Nostr — Developer Hub OG Image — 1200x630</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            width: 1200px; height: 630px; overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a; color: #f8fafc;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .card {
+            width: 1200px; height: 630px; padding: 68px 80px;
+            display: flex; flex-direction: column; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        /* Subtle grid background */
+        .card::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(251, 191, 36, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(251, 191, 36, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        /* Accent glow */
+        .card::after {
+            content: ''; position: absolute; top: -120px; right: -120px;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 70%);
+        }
+        .badge {
+            display: inline-block; background: rgba(251, 191, 36, 0.15); color: #fbbf24;
+            padding: 8px 20px; border-radius: 24px; font-size: 18px; font-weight: 600;
+            margin-bottom: 26px; position: relative; z-index: 1; width: fit-content;
+        }
+        h1 {
+            font-size: 78px; font-weight: 800; line-height: 1.05; margin-bottom: 18px;
+            letter-spacing: -0.02em; position: relative; z-index: 1;
+        }
+        h1 span { color: #fbbf24; }
+        .subtitle {
+            font-size: 23px; color: #94a3b8; line-height: 1.5; max-width: 760px;
+            position: relative; z-index: 1; margin-bottom: 40px;
+        }
+        .subtitle code {
+            font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 20px;
+            color: #e2e8f0; background: #1e293b; padding: 1px 8px; border-radius: 6px;
+        }
+        .stat-cards { display: flex; gap: 28px; position: relative; z-index: 1; }
+        .stat-card {
+            background: #1e293b; border: 1px solid #475569; border-radius: 14px;
+            padding: 22px 26px; flex: 1;
+        }
+        .stat-card .big { font-size: 46px; font-weight: 800; color: #fbbf24; line-height: 1; }
+        .stat-card .label { font-size: 20px; font-weight: 700; margin: 8px 0 4px; }
+        .stat-card code {
+            font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 15px; color: #94a3b8;
+        }
+        .url {
+            position: absolute; bottom: 44px; left: 80px; font-size: 18px; color: #64748b; z-index: 1;
+        }
+        .brand-mark {
+            position: absolute; bottom: 40px; right: 80px; z-index: 1;
+            display: flex; align-items: center; gap: 10px; color: #64748b; font-size: 17px; font-weight: 600;
+        }
+        .brand-mark .dot { width: 22px; height: 22px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">Developer Hub &middot; MIT Licensed</div>
+        <h1>Build on <span>Nostr</span></h1>
+        <p class="subtitle">One self-contained family of libraries &mdash; from a login button to a sovereign AI agent. Every layer is ours, from <code>secp256k1</code> up &mdash; minimal dependencies, no lock-in.</p>
+        <div class="stat-cards">
+            <div class="stat-card">
+                <div class="big">8</div>
+                <div class="label">TypeScript libraries</div>
+                <code>npm install nostr-crypto-utils</code>
+            </div>
+            <div class="stat-card">
+                <div class="big">9</div>
+                <div class="label">AI-agent skills</div>
+                <code>pip install nostrkey</code>
+            </div>
+            <div class="stat-card">
+                <div class="big">17</div>
+                <div class="label">Published packages</div>
+                <code>identity &middot; wallet &middot; memory</code>
+            </div>
+        </div>
+        <div class="url">loginwithnostr.com/developers</div>
+        <div class="brand-mark">
+            <svg class="dot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" stroke="#fbbf24" stroke-width="6" fill="#1e293b"/><path d="M30 50h40M50 30v40" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" fill="none"/></svg>
+            Humanjava
+        </div>
+    </div>
+</body>
+</html>
